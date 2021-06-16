@@ -30,5 +30,42 @@
       "title": "Learn Vue Js",
       "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industrys standarddummy text ever since the 1500s"
     }
+  ],
+  "studyMaterials": [
+    {
+      "id": 1,
+      "title": "Programación Basica",
+      "description": "Aprende las bases de programación"
+    },
+    {
+      "id": 2,
+      "title": "Programación1 ",
+      "description": "Aprende las bases de programación"
+    },
+    {
+      "id": 3,
+      "title": "Programación2 ",
+      "description": "Aprende las bases de programación"
+    },
+    {
+      "id": 4,
+      "title": "Programación3",
+      "description": "Aprende las bases de programación"
+    },
+    {
+      "id": 5,
+      "title": "Progra2",
+      "description": "Guía media"
+    }
+  ],
+  "institutes": [
+    {
+      "id": 1,
+      "title": "UPC"
+    },
+    {
+      "id": 2,
+      "title": "UNI "
+    }
   ]
 }

@@ -7,7 +7,12 @@ Vue.use(VueRouter)
 
 const routes=[
     {path:'/', component:Home},
-    {path:'/documents', component: Documents}
+    {path:'/documents', component: Documents},
+    {
+        path: '/studyMaterials/new',
+        name: 'add-studyMaterial',
+        component: () => import('../components/add-study-material')
+    }
 ]
 
 export default routes;

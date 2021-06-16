@@ -7,7 +7,7 @@
           <h3>Puedes compartir tus documentos y apuntes con
             el resto de personas dentro de tu aplicación.</h3>
           <img src="../images/sharing-information.png" alt="Sharing Information" class="sharing-img">
-          <button>SUBIR DOCUMENTOS</button>
+          <button @click="()=>this.$router.push('/studyMaterials/new')">SUBIR DOCUMENTOS</button>
         </div>
         <div class="features-container-item">
           <h3>Encuentra documentos de tus cursos de carrera
