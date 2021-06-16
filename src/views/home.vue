@@ -14,7 +14,7 @@
             dependiendo de tu universidad, así como asesorías con tutores
           expertos, gracias al sistema de búsqueda.</h3>
           <img src="../images/search-documents.png" alt="Find Documents">
-          <button @click="()=>this.$router.push('/documents')">SISTEMA DE BÚSQUEDA</button>
+          <button @click="()=>this.$router.push('/search')">SISTEMA DE BÚSQUEDA</button>
         </div>
         <div class="features-container-item">
           <h3>Pues compartir tus conocimientos en materias que domines y cobrar por ello,

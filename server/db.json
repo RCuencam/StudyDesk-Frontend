@@ -4,31 +4,73 @@
       "id": 1,
       "type": "polimorfism",
       "title": "Polimorfismo 0-100",
+      "author": "Gonzalo Gonzales",
       "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industrys standarddummy text ever since the 1500s"
     },
     {
       "id": 2,
       "title": "Learn Polimorfismo",
       "type": "polimorfism",
+      "author": "Alberto Quebrada",
       "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industrys standarddummy text ever since the 1500s"
     },
     {
       "id": 3,
       "title": "Polimorfism Edition 1",
       "type": "polimorfism",
+      "author": "Cesar Vallejo",
       "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industrys standarddummy text ever since the 1500s"
     },
     {
       "id": 4,
-      "type": "Polimorfism Edition 2",
-      "title": "Learn Vue Js",
+      "type": "polimorfism",
+      "title": "Polimorfism Edition 2",
+      "author": "Francisco Cañeda",
       "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industrys standarddummy text ever since the 1500s"
     },
     {
       "id": 5,
-      "type": "Polimorfism Edition 3",
-      "title": "Learn Vue Js",
+      "type": "polimorfism",
+      "title": "Polimorfism Edition 3",
+      "author": "Luis Montoya",
       "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industrys standarddummy text ever since the 1500s"
+    }
+  ],
+  "tutors": [
+    {
+      "id": 1,
+      "name": "Juan Gonzales",
+      "qualification": 3,
+      "description": "Soy una persona con muchas habilidades como la matemática y física. Cuento con varias certificaciones a nivel nacional. Estaré dispuesto a ayudarte en lo que necesites.",
+      "price": 20
+    },
+    {
+      "id": 2,
+      "name": "Romina Romero",
+      "qualification": 4,
+      "description": "Soy una persona con muchas habilidades como la matemática y física. Cuento con varias certificaciones a nivel nacional. Estaré dispuesto a ayudarte en lo que necesites.",
+      "price": 30
+    },
+    {
+      "id": 3,
+      "name": "Manso Malasquez",
+      "qualification": 5,
+      "description": "Soy una persona con muchas habilidades como la matemática y física. Cuento con varias certificaciones a nivel nacional. Estaré dispuesto a ayudarte en lo que necesites.",
+      "price": 20
+    },
+    {
+      "id": 4,
+      "name": "Johana Rivera",
+      "qualification": 2,
+      "description": "Soy una persona con muchas habilidades como la matemática y física. Cuento con varias certificaciones a nivel nacional. Estaré dispuesto a ayudarte en lo que necesites.",
+      "price": 15
+    },
+    {
+      "id": 5,
+      "name": "Khaty Tueros",
+      "qualification": 4,
+      "description": "Soy una persona con muchas habilidades como la matemática y física. Cuento con varias certificaciones a nivel nacional. Estaré dispuesto a ayudarte en lo que necesites.",
+      "price": 20
     }
   ]
 }
