@@ -20,7 +20,7 @@
           <h3>Pues compartir tus conocimientos en materias que domines y cobrar por ello,
           gracias a nuesta herramienta para tutores.</h3>
           <img src="../images/tutor-online.png" alt="Tutors Online">
-          <button>CONVIÉRTETE EN TUTOR</button>
+          <button @click="()=>this.$router.push('/tutorsdescription')">CONVIÉRTETE EN TUTOR</button>
         </div>
       </div>
 
