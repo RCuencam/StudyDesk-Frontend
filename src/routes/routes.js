@@ -1,4 +1,8 @@
 
+import TutorsDescription from "@/views/tutors-description";
+import TutorsCourses from "@/views/tutors-courses";
+import TutorProfile from "@/views/tutors-profile";
+
 import Home from "@/views/home";
 import Documents from "@/views/documents-search";
 import Search from "@/views/search";
@@ -12,7 +16,11 @@ const routes=[
     {path:'/search/documents', component: Documents},
     {path:'/search/documents/:id', component: DocumentInformation},
     {path:'/search/tutors', component:Tutors},
-    {path:'/search/tutors/:id', component:TutorInformation}
+    {path:'/search/tutors/:id', component:TutorInformation},
+    {path:'/documents', component: Documents},
+    {path:'/tutorsdescription',component: TutorsDescription},
+    {path:'/tutorscourses',component: TutorsCourses},
+    {path:'/tutorprofile',component:TutorProfile}
 ]
 
 export default routes;
