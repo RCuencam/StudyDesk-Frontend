@@ -62,6 +62,16 @@ h1,p{
   display: flex;
   justify-content: center;
 }
+@media screen and (max-width:768px){
+  .features-container{
+    flex-direction: column;
+    align-items: center;
+  }
+  .features-container-item{
+    width: 80% !important;
+    margin: 20px 0;
+  }
+}
 .features-container-item{
   width: 33.33%;
   margin: 0 10px;
