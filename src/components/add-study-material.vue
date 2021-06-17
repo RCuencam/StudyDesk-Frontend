@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card data-app>
     <div align="left">
       <v-icon x-large class="mr-2" @click="navigateToHome()">
         mdi-arrow-left-bold
