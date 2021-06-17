@@ -75,21 +75,22 @@
   ],
   "courses": [
     {
-      "id":1,
-      "title":"Fisica"
+      "id": 1,
+      "title": "Fisica"
     },
     {
-      "id":2,
-      "title":"Calculo 1"
+      "id": 2,
+      "title": "Calculo 1"
     },
     {
-      "id":3,
-      "title":"Programación 2"
+      "id": 3,
+      "title": "Programación 2"
     },
     {
       "id": 4,
       "title": "Complejidad Algoritmica"
-    }],
+    }
+  ],
   "studyMaterials": [
     {
       "id": 1,
@@ -123,6 +124,11 @@
     },
     {
       "id": 7,
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": 8,
       "title": "",
       "description": ""
     }

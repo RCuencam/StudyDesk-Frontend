@@ -126,7 +126,7 @@ export default {
       description: "",
       price: "",
       theme: "",
-      courses: ['Calculo 1', 'Programacion 2','Senderismo','Filosofia'],
+      courses: ['Calculo 1', 'Programacion 2','Periodismo','Filosofia'],
       textAreaRules: [
         (v) => !!v || "Este campo es requerido",
         (v) => v.length <= 300 || "Name must be less than 300 characters",
