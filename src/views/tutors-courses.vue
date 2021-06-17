@@ -82,9 +82,16 @@
                 rounded
                 class="shrink mx-4"
                 style="margin-top: 10px"
+                @click="isShowDialog = true"
               >
                 Crear perfil de tutor
+                <MyDialog :value="isShowDialog"></MyDialog>
               </v-btn>
+              
+
+
+
+
             </v-col>
           </v-row>
         </v-col>
@@ -109,6 +116,7 @@
 </template>
 
 <script>
+import MyDialog from '../components/show-dialog.vue'
 
 export default {
   name: "TutorsDescription",
@@ -123,8 +131,15 @@ export default {
         (v) => !!v || "Este campo es requerido",
         (v) => v.length <= 300 || "Name must be less than 300 characters",
       ],
+      isShowDialog:false,
     };
   },
+  components:{
+    MyDialog
+  },
+  methods:{
+    
+  }
 };
 </script>
 

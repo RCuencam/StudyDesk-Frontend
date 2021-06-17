@@ -4,6 +4,7 @@ import Home from "@/views/Home";
 import Documents from "@/views/Documents";
 import TutorsDescription from "@/views/tutors-description";
 import TutorsCourses from "@/views/tutors-courses";
+import TutorProfile from "@/views/tutors-profile";
 
 Vue.use(VueRouter)
 
@@ -11,7 +12,8 @@ const routes=[
     {path:'/', component:Home},
     {path:'/documents', component: Documents},
     {path:'/tutorsdescription',component: TutorsDescription},
-    {path:'/tutorscourses',component: TutorsCourses}
+    {path:'/tutorscourses',component: TutorsCourses},
+    {path:'/tutorprofile',component:TutorProfile}
 ]
 
 export default routes;
