@@ -87,8 +87,54 @@
       "title":"Programación 2"
     },
     {
-      "id":4,
-      "title":"Complejidad Algoritmica"
+      "id": 4,
+      "title": "Complejidad Algoritmica"
+    }],
+  "studyMaterials": [
+    {
+      "id": 1,
+      "title": "Programación Basica",
+      "description": "Aprende las bases de programación"
+    },
+    {
+      "id": 2,
+      "title": "Programación1 ",
+      "description": "Aprende las bases de programación"
+    },
+    {
+      "id": 3,
+      "title": "Programación2 ",
+      "description": "Aprende las bases de programación"
+    },
+    {
+      "id": 4,
+      "title": "Programación3",
+      "description": "Aprende las bases de programación"
+    },
+    {
+      "id": 5,
+      "title": "Progra2",
+      "description": "Guía media"
+    },
+    {
+      "id": 6,
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": 7,
+      "title": "",
+      "description": ""
+    }
+  ],
+  "institutes": [
+    {
+      "id": 1,
+      "title": "UPC"
+    },
+    {
+      "id": 2,
+      "title": "UNI"
     }
   ]
 }

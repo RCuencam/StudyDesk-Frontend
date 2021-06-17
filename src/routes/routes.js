@@ -20,7 +20,13 @@ const routes=[
     {path:'/documents', component: Documents},
     {path:'/tutorsdescription',component: TutorsDescription},
     {path:'/tutorscourses',component: TutorsCourses},
-    {path:'/tutorprofile',component:TutorProfile}
+    {path:'/tutorprofile',component:TutorProfile},
+    {path:'/documents', component: Documents},
+    {
+        path: '/studyMaterials/new',
+        name: 'add-studyMaterial',
+        component: () => import('../components/add-study-material')
+    }
 ]
 
 export default routes;
