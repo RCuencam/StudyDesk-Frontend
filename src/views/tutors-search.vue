@@ -49,6 +49,7 @@ export default {
       console.log(university,career,course,hour)
       TutorsApiService.getAll().then(data=>{
         setTimeout(()=>{
+          console.log(data)
           this.tutors=data.data
           this.loader=false
         },500)

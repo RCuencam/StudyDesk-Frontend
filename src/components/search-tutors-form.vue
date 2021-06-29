@@ -66,12 +66,12 @@
 export default {
   name: "SearchTutorsForm",
   data: () => ({
-    items:['07:00 - 08:00 am','08:00 - 09:00 am','09:00 - 10:00 am','10:00 - 11:00 am'],
+    items: ['07:00 - 08:00 am', '08:00 - 09:00 am', '09:00 - 10:00 am', '10:00 - 11:00 am'],
     valid: false,
     university: '',
     career: '',
     course: '',
-    hour:'',
+    hour: '',
 
     nameRules: [
       v => !!v || 'Este campo es requerido',
@@ -84,20 +84,21 @@ export default {
     ],
 
   }),
-  methods:{
-    enviarDatos(){
-      this.$emit('getData',this.university,this.career,this.course,this.hour)
+  methods: {
+    enviarDatos() {
+      this.$emit('getData', this.university, this.career, this.course, this.hour)
     }
   }
 }
 </script>
 
 <style scoped>
-.documents-container-form{
+.documents-container-form {
   padding: 40px;
   border-radius: 20px;
 }
-.documents-container-form-button{
+
+.documents-container-form-button {
   width: 200px;
   background: #2C305B !important;
   color: white;
