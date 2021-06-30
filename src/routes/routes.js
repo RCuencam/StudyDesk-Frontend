@@ -9,7 +9,7 @@ import Search from "@/views/search";
 import DocumentInformation from "@/views/document-information";
 import TutorInformation from "@/views/tutor-information";
 import Tutors from "@/views/tutors-search";
-
+import StudentProfile from '@/views/student-profile';
 const routes=[
     {path:'/', component:Home},
     {path:'/search',component: Search},
@@ -26,7 +26,8 @@ const routes=[
         path: '/studyMaterials/new',
         name: 'add-studyMaterial',
         component: () => import('../components/add-study-material')
-    }
+    },
+    {path:"/student/profile", component:StudentProfile}
 ]
 
 export default routes;

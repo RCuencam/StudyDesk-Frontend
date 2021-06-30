@@ -2,7 +2,7 @@
   <v-form v-model="valid">
     <v-container fluid id="bg">
       <v-row>
-        <v-col cols="12" sm="6">
+        <v-col cols="12" sm="6" class="tutor_description">
           <h1>StudyDesk</h1>
 
           <h3>Conviértete en tutor</h3>
@@ -11,7 +11,6 @@
           <v-textarea
             style="margin: 30px 20px 0px 20px; background-color: white"
             height="130px"
-            rounded
             filled
             clearable
             counter
@@ -32,7 +31,6 @@
                 style="margin-top: 30px"
                 background-color="#ffffff"
                 dense
-                rounded
                 single-line
                 filled
                 append-icon="mdi-cash-multiple"
@@ -46,21 +44,6 @@
               </v-btn>
             </v-col>
 
-            <v-spacer></v-spacer>
-          </v-row>
-        </v-col>
-        <v-col cols="12" sm="6" id="bg-color">
-          <v-spacer style="height: 25%" />
-          <v-row>
-            <v-spacer></v-spacer>
-            <v-img
-              src="../images/avatar.png"
-              style="opacity: 0.7"
-              contain
-              max-width="300px"
-              min-width="250px"
-            >
-            </v-img>
             <v-spacer></v-spacer>
           </v-row>
         </v-col>
@@ -89,9 +72,7 @@ export default {
 
 <style scoped>
 #bg {
-  background-image: url("../images/fondo1.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
+
   text-align: center;
 }
 
@@ -117,5 +98,9 @@ h3 {
 h4 {
   padding-top: 30px;
   font-size: 1.05em;
+}
+.tutor_description{
+  margin: 0 auto;
+  height: 100vh;
 }
 </style>
