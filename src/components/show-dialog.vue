@@ -37,6 +37,7 @@
 
 <script>
 export default {
+    name:'MyDialog',
     props:{
         value:Boolean
     },
@@ -47,7 +48,6 @@ export default {
     },
     methods:{
         clickHandler: function(){
-            this.value = false;
             this.$router.push('/tutorprofile');
         }
     }

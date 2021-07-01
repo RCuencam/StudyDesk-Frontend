@@ -62,7 +62,7 @@ export default {
       price:'',
       textAreaRules: [
       v => !!v || 'Este campo es requerido',
-      v => v.length <= 300 || 'Name must be less than 300 characters',
+      v => v <= 300 || 'Name must be less than 300 characters',
       ],
 
     }
