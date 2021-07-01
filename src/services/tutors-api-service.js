@@ -7,6 +7,9 @@ class TutorsApiService{
     get(id){
         return http.get(`/tutors/${id}`)
     }
+    getTutorByCareerId(careerId) {
+        return http.get(`/careers/${careerId}/tutors`)
+    }
 }
 
 export default  new TutorsApiService();

@@ -1,4 +1,4 @@
-<template>
+  <template>
   <div class="documents">
     <div class="documents-container" data-app>
       <h1>Búsqueda de Documentos</h1>
