@@ -17,9 +17,31 @@
             clear-icon="mdi-close-circle"
             no-resize
             placeholder="Ingresa tu biografia, habilidades, etc"
-            :rules="textAreaRules"
-            
+            :rules="textAreaRules"    
+            v-model="descriptionTutor"
           ></v-textarea>
+
+          <h4>Ingrese su nueva contraseña</h4>
+
+          <v-row>
+            <v-spacer></v-spacer>
+
+            <v-col cols="6">
+              <v-text-field
+                style="margin-top: 30px"
+                background-color="#ffffff"
+                dense
+                single-line
+                filled
+                class="shrink mx-4"
+                v-model="password"
+                type="password"
+              >
+              </v-text-field>
+            </v-col>
+
+            <v-spacer></v-spacer>
+          </v-row>
 
           <h4>Ingrese su rango de precios por hora</h4>
 
@@ -35,12 +57,19 @@
                 filled
                 append-icon="mdi-cash-multiple"
                 class="shrink mx-4"
+                v-model="priceTutor"
               >
               </v-text-field>
 
-              <v-btn color="#2c305b" dark rounded class="shrink mx-4" 
-              @click="()=>this.$router.push('/tutorscourses')">
-                Siguiente
+              <v-btn
+                color="#2c305b"
+                dark
+                class="shrink mx-4"
+                style="margin-top: 10px"
+                @click="createTutor()"
+              >
+                Crear perfil de tutor
+                <MyDialog :value="isShowDialog"></MyDialog>
               </v-btn>
             </v-col>
 
@@ -53,7 +82,11 @@
 </template>
 
 <script>
+import MyDialog from '../components/show-dialog.vue'
+import StudentsApiService from "../services/students-api.service"
+import tutorsApiService from '../services/tutors-api-service';
 export default {
+  
   name: "TutorsDescription",
   data() {
     return {
@@ -64,9 +97,51 @@ export default {
       v => !!v || 'Este campo es requerido',
       v => v <= 300 || 'Name must be less than 300 characters',
       ],
-
+      isShowDialog:false,
+      dataUser:{},
+      descriptionTutor:'',
+      priceTutor:0,
+      password:'',
+      newTutor:{
+        name:'',
+        lastName:'',
+        description:'',
+        logo:'',
+        email:'',
+        password:'',
+        pricePerHour:0
+      }
     }
   },
+  created(){
+    const user = JSON.parse(localStorage.getItem('user'));
+    StudentsApiService.getId(user.id).then(data=>{
+      this.dataUser=data.data
+      console.log('user',this.dataUser);
+      })
+  },
+  components:{
+    MyDialog
+  },
+  methods:{
+    createTutor(){
+
+      this.newTutor.name=this.dataUser.name
+      this.newTutor.lastName=this.dataUser.lastName
+      this.newTutor.logo=this.dataUser.logo
+      this.newTutor.password=this.password
+      this.newTutor.email=this.dataUser.email
+      this.newTutor.description=this.descriptionTutor
+      this.newTutor.pricePerHour=Number(this.priceTutor)
+
+      console.log('xd',this.newTutor);
+      tutorsApiService.postTutor(this.dataUser.careerId,this.newTutor).then(data=>{
+        this.isShowDialog=true
+        console.log(data);
+        localStorage.setItem('tutor',JSON.stringify(data.data))
+        }).catch(error=>console.log('error',error.response))
+    }
+  }
 };
 </script>
 

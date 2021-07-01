@@ -13,12 +13,6 @@
                     </div>
                 </div>
                 <div class="student-profile-description">
-                    <v-form>
-                        <v-label for="">Ingrese una descripción</v-label>
-                        <v-textarea no-resize>
-
-                        </v-textarea>
-                    </v-form>
                     <v-dialog
                         transition="dialog-top-transition"
                         max-width="600"
@@ -56,12 +50,14 @@
                         <v-card v-for="reservation in byPendingDates" :key="reservation.id" class="pending-reservations">
                             <v-row >
                                 <v-col cols="8">
-                                    <v-card-title>{{reservation.title}}</v-card-title>
-                                    <v-card-subtitle>{{reservation.tutor}}</v-card-subtitle>
+                                    <v-card-title>{{reservation.description}}</v-card-title>
+                                    <v-card-subtitle>Alumno: {{reservation.tutor.name}}</v-card-subtitle>
                                 </v-col>
-                                <v-col cols="4" align-self="right">
-                                    <v-card-title>{{reservation.date}}</v-card-title>
-                                    <v-card-subtitle>{{reservation.url}}</v-card-subtitle>
+                                <v-col cols="4" align-self="right" class="pending_reservations_center">
+                                    <v-card-subtitle>Fecha: {{reservation.startDateTime.substr(0,10)}} <br> 
+                                    Hora: {{reservation.startDateTime.substr(11,15)}} <br>
+                                    Plataforma: {{reservation.platformUrl}}
+                                    </v-card-subtitle>
                                 </v-col>
                             </v-row>
                         </v-card>
@@ -72,18 +68,15 @@
                         <h1>Tutorías Pasadas</h1>
                         <v-card v-for="reservation in byPastDates" :key="reservation.id" class="past-reservations">
                             <v-row >
-                                <v-col cols="6" md="8">
-                                    <v-card-title>{{reservation.title}}</v-card-title>
-                                    <v-card-subtitle>{{reservation.tutor}}</v-card-subtitle>
+                                <v-col cols="8">
+                                    <v-card-title>{{reservation.description}}</v-card-title>
+                                    <v-card-subtitle>Alumno: {{reservation.tutor.name}}</v-card-subtitle>
                                 </v-col>
-                                <v-col cols="6" md="4">
-                                    <v-card-title class="past-reservations-date">{{reservation.date}}</v-card-title>
-                                    <v-rating
-                                    hover
-                                    v-model="reservation.qualification"
-                                    background-color="purple lighten-3"
-                                    color="purple"
-                                    ></v-rating>
+                                <v-col cols="4" align-self="right" class="pending_reservations_center">
+                                    <v-card-subtitle>Fecha: {{reservation.startDateTime.substr(0,10)}} <br> 
+                                    Hora: {{reservation.startDateTime.substr(11,15)}} <br>
+                                    Plataforma: {{reservation.platformUrl}}
+                                    </v-card-subtitle>
                                 </v-col>
                             </v-row>
                         </v-card>
@@ -95,7 +88,7 @@
 </template>
 
 <script>
-import ReservationsApiService from "@/services/reservations-api-service";
+import ReservationApiService from '../services/reservations-api-service'
 import moment from "moment";
 
     export default {
@@ -111,11 +104,12 @@ import moment from "moment";
             pendingReservations:[]
         }),
         created:function(){
-            ReservationsApiService.getAll().then(data=>{
+            const user=JSON.parse(localStorage.getItem('user'));
+            ReservationApiService.getReservationByStudentId(user.id).then(data=>{
                     this.reservations=data.data;
-                    console.log(this.reservations);
-                })
-            this.today=`${this.day}-${this.month}-${this.year}`;
+                    console.log('xd',this.reservations);
+                }).catch(error=>console.log(error))
+            this.today=`${this.year}-0${this.month}-0${this.day}`;
             console.log(this.today);
         },
         methods:{
@@ -125,8 +119,10 @@ import moment from "moment";
             byPastDates:function(){
                 
                 return this.reservations.filter(item=>{
-                    var time1 = moment(item.date,'DD-MM-YYYY')
-                    var time2 = moment(this.today,'DD-MM-YYYY')
+                    var time1 = moment(item.startDateTime.substr(0,10),'YYYY-MM-DD')
+                    console.log('time1past',time1);
+                    var time2 = moment(this.today,'YYYY-MM-DD')
+                    console.log('time2past',time2);
                     if(time2 > time1){
                        return item
                     }
@@ -135,9 +131,11 @@ import moment from "moment";
             byPendingDates:function(){
                 
                 return this.reservations.filter(item=>{
-                    var time1 = moment(item.date,'DD-MM-YYYY')
-                    var time2 = moment(this.today,'DD-MM-YYYY')
-                    if(time2 < time1){
+                    var time1 = moment(item.startDateTime.substr(0,10),'YYYY-MM-DD')
+                    console.log('time1pending',time1);
+                    var time2 = moment(this.today,'YYYY-MM-DD')
+                    console.log('time2pending',time2);
+                    if(time2 <= time1){
                        return {item}
                     }
                 })
@@ -193,6 +191,9 @@ import moment from "moment";
     color:#2C305B;
     display: flex;
     align-items: center;
+}
+.pending_reservations_center{
+    text-align: center;
 }
 .past-reservations-date{
     padding-bottom: 0 !important;

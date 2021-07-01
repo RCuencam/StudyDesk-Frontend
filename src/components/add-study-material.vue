@@ -16,16 +16,13 @@
             <v-text-field v-model="editedItem.title" label="titulo"></v-text-field>
           </v-col>
           <v-col cols="12" sm="6" md="4">
-            <v-select :items="institutes" label="Universidades" ></v-select>
+            <v-textarea v-model="editedItem.description" filled rounded label="Descripción del documento"></v-textarea>
           </v-col>
           <v-card-actions class="documents-file">
             <v-btn color="blue darken-1" text @click="addStudyMaterial">Buscar en el equipo </v-btn>
             <p>{{file.name}}</p>
             <v-img src="fileImage"></v-img>
           </v-card-actions>
-          <v-col cols="12" sm="6" md="4">
-            <v-textarea v-model="editedItem.description" filled rounded label="Descripción del documento"></v-textarea>
-          </v-col>
         </v-row>
       </v-container>
     </v-card-text>
@@ -68,10 +65,11 @@ export default {
       displayStudyMaterials: [],
       institutes:[],
       editedIndex: -1,
-      editedItem:{id:0, title: '', description: ''},
+      editedItem:{title: '', description: '', fileUrl:'', topicId:1},
       defaultItem:{id:0, title: '', description: ''},
       file:{},
-      fileImage:""
+      fileImage:"",
+
     }
   },
   watch: {
@@ -130,6 +128,7 @@ export default {
       } else {
         StudyMaterialsApiService.create(this.editedItem)
             .then(response => {
+              console.log('rpta',response,this.editedItem);
               let item = response.data;
               this.studyMaterials.push(item);
               this.displayStudyMaterials.push(this.getDisplayStudyMaterial(item));

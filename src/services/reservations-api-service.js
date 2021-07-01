@@ -19,6 +19,19 @@ class ReservetionsApiService{
     delete(id) {
         return http.delete(`/institutes/${id}`);
     }*/
+    getReservationByTutorId(tutorId){
+        return http.get(`/tutors/${tutorId}/students`);
+    }
+
+    getReservationByStudentId(studentId){
+        return http.get(`/students/${studentId}/tutors`)
+    }
+
+    updateReservation(id,studentId,tutorId,data){
+        console.log('dta',data);
+        return http.put(`students/${studentId}/tutors/${tutorId}?id=${id}`,data)
+    }
+    
 }
 
 export default new ReservetionsApiService();

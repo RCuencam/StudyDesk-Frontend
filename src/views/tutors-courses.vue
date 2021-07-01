@@ -114,6 +114,10 @@ export default {
       isShowDialog:false,
     };
   },
+  created(){
+    const user = JSON.parse(localStorage.getItem('user'));
+    console.log(user);
+  },
   components:{
     MyDialog
   },

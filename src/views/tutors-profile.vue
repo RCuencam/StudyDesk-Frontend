@@ -19,55 +19,62 @@
     <v-col cols="12" md="6" class="tutor-profile-content">
       <v-row class="tutor-profile-content-requests">
         <h2>Solicitudes de Tutoría</h2>
-        <v-card class="tutor-profile-content-requests-item">
-          <div>
-            <v-card-title>SÁBADO</v-card-title>
-            <v-card-subtitle>20-04-2021
-              <br>Hora: <br>15:00-16:00pm
-            </v-card-subtitle>
+        <div v-if="!solicitudIsEmpty()">
+          <v-card v-for="item in solicitudes" :key="item.id" class="tutor-profile-content-requests-item">
+            <div>
+              <v-card-title>{{item.description}}</v-card-title>
+              <v-card-subtitle>
+                Hora: {{item.endDateTime.substr(11,13)}} <br>
+                Fecha:{{item.startDateTime.substr(0,10)}}
+              </v-card-subtitle>
 
-          </div>
-          <div>
-            <button class="tutor-profile-content-request-button-accept">Aceptar</button>
-            <button class="tutor-profile-content-request-button-deny">Denegar</button>
-          </div>
-        </v-card>
+            </div>
+            <div>
+              <button class="tutor-profile-content-request-button-accept" @click="acceptReservation(item.id)">Aceptar</button>
+              <button class="tutor-profile-content-request-button-deny" @click="denyReservation(item.id)">Denegar</button>
+            </div>
+          </v-card>
+        </div>
+        <div v-else class="empty">
+          <h2>No hay solicitudes pendientes</h2>
+        </div>
+        
       </v-row>
       <v-row class="tutor-profile-content-tutorials">
         <h2>Mis tutorías de esta semana</h2>
-        <v-card class="tutor-profile-content-tutorials-item">
-          <div>
-            <v-card-title>PROGRAMACIÓN 2</v-card-title>
-            <v-card-subtitle>Tema: Herencia <br>Hora: 9:00 - 10:00pm</v-card-subtitle>
-          </div>
-          <div>
-            <v-card-title>Omar Clavijo</v-card-title>
-            <v-card-subtitle>Martes <br>20-04-2021 </v-card-subtitle>
-          </div>
-        </v-card>
-        <v-card class="tutor-profile-content-tutorials-item">
-          <div>
-            <v-card-title>ALGORITMIA 2</v-card-title>
-            <v-card-subtitle>Tema: Redes Neuronales <br>Hora: 9:00 - 10:00pm</v-card-subtitle>
-          </div>
-          <div>
-            <v-card-title>Marcos Medina</v-card-title>
-            <v-card-subtitle>Martes <br>20-04-2021</v-card-subtitle>
-          </div>
-        </v-card>
+        <div v-if="!misTutoriasEmpty()">
+          <v-card v-for="item in tutoriasConfirmadas" :key="item.id" class="tutor-profile-content-tutorials-item">
+            <div>
+              <v-card-title>{{item.description}}</v-card-title>
+              <v-card-subtitle>Hora:{{item.endDateTime.substr(11,13)}} <br> Fecha: {{item.startDateTime.substr(0,10)}}</v-card-subtitle>
+            </div>
+            <div>
+              <v-card-title>{{item.student.name}}</v-card-title>
+              <v-card-subtitle>{{item.platformUrl}}</v-card-subtitle>
+            </div>
+          </v-card>
+        </div>
+        <div v-else class="empty">
+          <h2>No hay tutorías Pendientes</h2>
+        </div>
       </v-row>
       <v-row class="tutor-profile-content-schedules">
         <h2>Mis horarios</h2>
-        <v-card class="tutor-profile-content-schedules-item">
-          <div>
-            <v-card-title>SÁBADO</v-card-title>
-            <v-card-subtitle>24-04-2021</v-card-subtitle>
-          </div>
-          <div>
-            <v-card-title>HORA</v-card-title>
-            <v-card-subtitle>15:00-16:00pm</v-card-subtitle>
-          </div>
-        </v-card>
+        <div v-if="!schedulesIsEmpty()">
+          <v-card v-for="item in schedules" :key="item.id" class="tutor-profile-content-schedules-item">
+            <div>
+              <v-card-title>Hora:</v-card-title>
+              <v-card-subtitle>{{item.endDate}}</v-card-subtitle>
+            </div>
+            <div>
+              <v-card-title>Fecha:</v-card-title>
+              <v-card-subtitle>{{item.starDate}}</v-card-subtitle>
+            </div>
+          </v-card>
+        </div>
+        <div v-else class="empty">
+          <h2>No hay tutorías Pendientes</h2>
+        </div>
       </v-row>
     </v-col>
   </v-row>
@@ -76,15 +83,86 @@
 
 
 <script>
+import ReservationApiService from '../services/reservations-api-service'
 import tutorsApiService from '../services/tutors-api-service';
+
 export default {
   data:()=>({
-    tutor:{}
+    reservations:[],
+    schedules:[],
+    fechas:[],
+    array:[],
+    updatedReservation:{},
+    arraryFecha:{}
   }),
   created:function(){
-    tutorsApiService.get(1).then(data=>{
-      this.tutor=data.data
+    const tutorJson=JSON.parse(localStorage.getItem('tutor'))
+    console.log(tutorJson.id);
+    ReservationApiService.getReservationByTutorId(tutorJson.id).then(data=>{
+      this.array=data.data
+      this.reservations=this.array.map(item=>{
+      return item
       })
+      
+    })
+
+
+    tutorsApiService.getSchedules(tutorJson.id).then(data=>{
+      this.arr=data.data
+      this.schedules=this.arr.map(item=>{
+        item.starDate=item.starDate.substr(0,10)
+        item.endDate=item.endDate.substr(11,13)
+        return item
+      })
+
+    })
+
+  },
+  methods:{
+    acceptReservation(id){
+      this.reservations=this.reservations.map(item=>{
+        if(item.id===id){
+          item.confirmed=false
+          this.updatedReservation=item
+        }
+        return item
+      })
+      
+      const tutorJson=JSON.parse(localStorage.getItem('tutor'))
+
+      const newReservation={
+        platformUrl: this.updatedReservation.platformUrl,
+        startDateTime: this.updatedReservation.startDateTime,
+        endDateTime: this.updatedReservation.startDateTime,
+        qualification: this.updatedReservation.qualification,
+        description: this.updatedReservation.description,
+        confirmed: this.updatedReservation.confirmed
+      }
+
+      ReservationApiService.updateReservation(this.updatedReservation.id,this.updatedReservation.student.id,tutorJson.id,newReservation)
+      .then(data=>console.log(data))
+      .catch(error=>console.log(error.response))
+    },
+    denyReservation(id){
+      this.reservations=this.reservations.filter(item=>item.id!=id);
+    },
+    solicitudIsEmpty(){
+      return this.solicitudes.length===0;
+    },
+    misTutoriasEmpty(){
+      return this.tutoriasConfirmadas.length===0;
+    },
+    schedulesIsEmpty(){
+      return this.schedules.length===0;
+    }
+  },
+  computed:{
+    solicitudes(){
+      return this.reservations.filter(item=>item.confirmed===true);
+    },
+    tutoriasConfirmadas(){
+      return this.reservations.filter(item=>item.confirmed===false);
+    }
   }
 };
 </script>
@@ -185,10 +263,15 @@ h4 {
 }
 .tutor-profile-content-tutorials-item{
   display: flex;
-  text-align: center;
+  text-align: left;
   justify-content: space-between;
   align-items: center;
   margin: 20px 0;
+  background: #2c305b;
+  color:white !important;
+}
+.tutor-profile-content-tutorials-item .v-card__subtitle{
+  color: white !important;
 }
 .tutor-profile-content-request-button-accept{
   background: green;
@@ -211,5 +294,9 @@ h4 {
   display: flex;
   justify-content: space-between;
   margin: 20px 0;
+}
+.empty{
+  text-align: center;
+  margin: 30px 0;
 }
 </style>

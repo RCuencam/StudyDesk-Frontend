@@ -10,7 +10,7 @@ class StudyMaterialsApiService{
     }
 
     create(data) {
-        return http.post("/studyMaterials", data);
+        return http.post("/studymaterials", data);
     }
 
     update(id, data) {
