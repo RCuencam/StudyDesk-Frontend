@@ -1,5 +1,11 @@
   <template>
   <div class="documents">
+    <div align="left">
+      <v-icon x-large class="mr-2" @click="navigateToHome()">
+        mdi-arrow-left-bold
+      </v-icon>
+      <label>Volver al menú principal</label>
+    </div>
     <div class="documents-container" data-app>
       <h1>Búsqueda de Documentos</h1>
       <SearchDocumentsForm @getData="getData"/>
@@ -32,7 +38,8 @@
 
 <script>
 import SearchDocumentsForm from "@/components/search-documents-form";
-import DocumentsApiService from "@/services/documents-api-service";
+import TopicMaterialsApiService from "../services/topic-materials-api.service";
+
 export default {
   name: "Documents",
   data: () => ({
@@ -52,7 +59,7 @@ export default {
       this.loader=true;
       this.showData=false
       console.log(university,career,course,theme)
-      DocumentsApiService.getAll().then(data=>{
+      TopicMaterialsApiService.getAll(theme).then(data=>{
         console.log(data)
         setTimeout(()=>{
           this.documents=data.data
@@ -62,7 +69,10 @@ export default {
     },
     goToDocument(id){
       this.$router.push(`/search/documents/${id}`)
-    }
+    },
+    navigateToHome() {
+      this.$router.push('/');
+    },
   }
 }
 </script>

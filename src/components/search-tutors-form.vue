@@ -9,7 +9,6 @@
           <v-select
               v-model="university"
               :items="displayInstitutes"
-              :counter="30"
               label="Universidad"
               outlined
               required
@@ -23,7 +22,6 @@
           <v-select
               v-model="career"
               :items="displayCareers"
-              :counter="30"
               label="Carrera"
               outlined
               required
@@ -31,20 +29,7 @@
         </v-col>
 
       </v-row>
-      <v-row>
-        <v-col
-            cols="12"
-            md="6"
-        >
-          <v-select
-              v-model="hour"
-                :items="items"
-              label="07:00 - 08:00 am"
-              outlined
-          ></v-select>
-        </v-col>
 
-      </v-row>
     </v-container>
     <v-btn class="documents-container-form-button" @click="enviarDatos">Buscar</v-btn>
   </v-form>
@@ -58,7 +43,6 @@ export default {
   name: "SearchTutorsForm",
 
   data: () => ({
-    items: ['07:00 - 08:00 am', '08:00 - 09:00 am', '09:00 - 10:00 am', '10:00 - 11:00 am'],
     valid: false,
     university: '',
     career: '',
@@ -67,16 +51,6 @@ export default {
     institutes: [],
     displayCareers: [],
     careers: [],
-
-    nameRules: [
-      v => !!v || 'Este campo es requerido',
-      v => v.length <= 30 || 'Name must be less than 30 characters',
-    ],
-    email: '',
-    emailRules: [
-      v => !!v || 'E-mail is required',
-      v => /.+@.+/.test(v) || 'E-mail must be valid',
-    ],
 
   }),
   methods: {
@@ -91,8 +65,8 @@ export default {
         this.institutes = result.data;
       })
     },
-    getCareers(careerId) {
-      CareersApiService.getAll(careerId).then(result => {
+    getCareers(instituteId) {
+      CareersApiService.getAll(instituteId).then(result => {
         console.log(result)
         for (let i = 0; i < result.data.length; i++ ) {
           this.displayCareers.push(result.data[i].name);

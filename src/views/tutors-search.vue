@@ -1,5 +1,10 @@
 <template>
   <div class="tutors">
+
+      <v-icon x-large class="mr-2" @click="navigateToHome">
+        mdi-arrow-left-bold
+      </v-icon>
+
     <div class="tutors-container">
       <h1>Buscar Tutores</h1>
       <SearchTutorsForm @getData="getData"/>
@@ -58,7 +63,10 @@ export default {
     },
     goToTutor(id){
       this.$router.push(`/search/tutors/${id}`)
-    }
+    },
+    navigateToHome() {
+      this.$router.push('/');
+    },
   }
 }
 </script>

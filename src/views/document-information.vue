@@ -7,8 +7,9 @@
         <img src="../images/book.png" alt="document">
        </div>
        <div>
+<!--         TODO: la description se sale del box-->
          <v-card-text class="document-info-container-content-text">{{document.description}}</v-card-text>
-         <v-card-text class="document-info-container-content-subtitle">Autor: {{document.author}}</v-card-text>
+<!--         <v-card-text class="document-info-container-content-subtitle">Description: {{document.author}} </v-card-text>-->
          <v-progress-circular
              v-if="loader"
              :size="20"
@@ -26,7 +27,9 @@
 </template>
 
 <script>
-import DocumentsApiService from "@/services/documents-api-service";
+//import DocumentsApiService from "@/services/documents-api-service";
+import StudyMaterialsApiService from "../services/study-materials-api.service"
+
 export default {
   name: "DocumentInformation",
   data:()=>({
@@ -37,12 +40,14 @@ export default {
     downloadDocument(){
       this.loader=true;
       setTimeout(()=>{
+        // TODO: interaction with api file stack
+
         this.loader=false;
       },1000)
     }
   },
   created(){
-    DocumentsApiService.get(this.$route.params.id).then(data=>this.document=data.data)
+    StudyMaterialsApiService.get(this.$route.params.id).then(data=>this.document=data.data)
   }
 }
 </script>
