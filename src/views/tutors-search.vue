@@ -34,6 +34,7 @@
 <script>
 import SearchTutorsForm from "@/components/search-tutors-form";
 import TutorsApiService from "../services/tutors-api-service";
+
 export default {
   name: "Tutors",
   data:()=>({
@@ -47,8 +48,9 @@ export default {
     getData(university,career,course,hour){
       this.loader=true;
       console.log(university,career,course,hour)
-      TutorsApiService.getAll().then(data=>{
+      TutorsApiService.getTutorByCareerId(career).then(data=>{
         setTimeout(()=>{
+          console.log(data)
           this.tutors=data.data
           this.loader=false
         },500)

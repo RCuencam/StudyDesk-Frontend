@@ -9,6 +9,9 @@ import Search from "@/views/search";
 import DocumentInformation from "@/views/document-information";
 import TutorInformation from "@/views/tutor-information";
 import Tutors from "@/views/tutors-search";
+import StudentProfile from '@/views/student-profile';
+import Login from "../views/login";
+import Register from "../views/register"
 
 const routes=[
     {path:'/', component:Home},
@@ -22,11 +25,14 @@ const routes=[
     {path:'/tutorscourses',component: TutorsCourses},
     {path:'/tutorprofile',component:TutorProfile},
     {path:'/documents', component: Documents},
+    {path: '/login', component: Login},
+    {path: '/register', component: Register},
     {
         path: '/studyMaterials/new',
         name: 'add-studyMaterial',
         component: () => import('../components/add-study-material')
-    }
+    },
+    {path:"/student/profile", component:StudentProfile}
 ]
 
 export default routes;

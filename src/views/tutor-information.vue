@@ -4,10 +4,12 @@
       <v-col cols="12" md="5">
         <v-row class="tutor-container-info">
           <v-col cols="12" class="tutor-container-info-img">
+            <!--                    TODO: insert img of tutor dynamic-->
             <img src="../images/tutor.png" alt="Tutor">
           </v-col>
           <v-col cols="12" class="tutor-container-info-text">
             <h2>{{tutor.name}}</h2>
+            <!--                    TODO: insert qualification dynamic-->
             <v-rating color="yellow" :value="tutor.qualification" large readonly></v-rating>
             <p>{{ tutor.description }}</p>
           </v-col>
@@ -19,15 +21,8 @@
           <v-label>Temas a tratar</v-label>
           <v-textarea no-resize
           ></v-textarea>
-          <v-label>Reunión Vía</v-label>
-          <v-select
-              :items="meets"
-          ></v-select>
-          <v-label>Cantidad de horas</v-label>
-          <v-select
-              :items="hours"
-          ></v-select>
-          <p class="tutor-price"><b>{{"Total a pagar: S/"+ tutor.price + ".00" }}</b></p>
+
+          <p class="tutor-price"><b>Monto: {{ totalPrice }}</b></p>
           <br>
           <v-dialog
               transition="dialog-top-transition"
@@ -45,14 +40,21 @@
               <v-card class="modal-tutor">
                 <v-img src="../images/check.png" width="50" height="50" class="modal-check"></v-img>
                 <v-card-text class="modal-text">
-                  <div class="text-h1">Se reservó la tutoría correctamente!</div>
+                  <div class="reserve-content-dialog">
+                    <h1 class="dialog-item">Se reservó la tutoría correctamente!</h1>
+                    <h2 class="dialog-item">Enlace de reunion: </h2>
+<!--                    TODO: insert link dynamic-->
+                    <h3 class="dialog-item"><a href="">{{ "insertar link" }}</a></h3>
+                  </div>
                 </v-card-text>
                 <v-card-actions class="justify-end">
+
                   <v-btn
                       text
-                      @click="dialog.value = false"
+                      @click="navigateToSearchTutors(dialog)"
                       class="modal-button"
                   >Close</v-btn>
+
                 </v-card-actions>
               </v-card>
             </template>
@@ -67,15 +69,50 @@
 
 <script>
 import TutorsApiService from "../services/tutors-api-service";
+
+
 export default {
   name: "TutorInformation",
   data:()=>({
-    meets:['ZOOM','GOOGLE MEETS'],
-    hours:['1 hora','2 horas'],
-    tutor:{}
+    tutor:{
+      pricePerHour: ""
+    }
   }),
   created(){
     TutorsApiService.get(this.$route.params.id).then(data=>this.tutor=data.data)
+    // TODO: insert request for qualification [TutorReservations] o lo paso como props?
+  },
+  computed: {
+    totalPrice() {
+      return "S/" + this.tutor.pricePerHour + ".00"
+    }
+  },
+  methods: {
+    navigateToSearchTutors(dialog) {
+      dialog.value = false
+      let user = JSON.parse(localStorage.getItem('user'));
+      if (user.id) {
+        // TODO: call api reserve tutor
+        console.log(user.id)
+      }
+
+      // this.$store.dispatch('auth/login', this.user).then(
+      //     (user) => {
+      //       console.log('Logged In');
+      //       console.log(user);
+      //       if (user.token) this.$router.push('/');
+      //     },
+      //     error => {
+      //       console.log('Error');
+      //       this.message = (error.response && error.response.data)
+      //           || error.message || error.toString();
+      //     }
+      // )
+
+
+      // this.$router.push("/search/tutors")
+    }
+
   }
 }
 </script>
@@ -124,11 +161,17 @@ export default {
   margin: 0 0 30px 0;
   color: #2C305B;
 }
-.text-h1{
-  font-size: 2em;
-  text-align: center;
-  padding: 20px 0;
+.reserve-content-dialog {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
 }
+.dialog-item {
+  text-align: center;
+  padding: 10px;
+}
+
 .modal-check{
   margin: 0 auto;
 }

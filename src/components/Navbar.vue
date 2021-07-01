@@ -3,6 +3,7 @@
       color="grey lighten-4"
   >
     <v-toolbar
+      data
     >
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
 
@@ -16,14 +17,35 @@
           <span class="white--text text-h5">User</span>
         </v-avatar>
         <span class="white--text text-h5">Javier Luján</span>
-        <v-btn icon small class="row-button">
-          <v-icon
-              large
-              dense
+        <v-menu
+        left
+        bottom
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            icon
+            v-bind="attrs"
+            v-on="on"
           >
-            mdi-chevron-down
-          </v-icon>
-        </v-btn>
+            <v-icon>mdi-chevron-down</v-icon>
+          </v-btn>
+        </template>
+
+        <v-list>
+          <v-list-item
+
+            @click="() => this.$router.push('/student/profile')"
+          >
+            <v-list-item-title>Perfil</v-list-item-title>
+          </v-list-item>
+          <v-list-item
+
+            @click="() => {}"
+          >
+            <v-list-item-title>Cerrar Sesión</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
       </div>
     </v-toolbar>
     <v-navigation-drawer

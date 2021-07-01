@@ -18,8 +18,10 @@
           <v-col cols="12" sm="6" md="4">
             <v-select :items="institutes" label="Universidades" ></v-select>
           </v-col>
-          <v-card-actions>
-            <v-btn color="blue darken-1" text @click="close">Buscar en el equipo </v-btn>
+          <v-card-actions class="documents-file">
+            <v-btn color="blue darken-1" text @click="addStudyMaterial">Buscar en el equipo </v-btn>
+            <p>{{file.name}}</p>
+            <v-img src="fileImage"></v-img>
           </v-card-actions>
           <v-col cols="12" sm="6" md="4">
             <v-textarea v-model="editedItem.description" filled rounded label="Descripción del documento"></v-textarea>
@@ -54,7 +56,7 @@ import InstitutesApiService from "@/services/institutes-api.service";
 import CategoriesApiService from "@/services/categories-api.service";
 import CoursesApiService from "@/services/courses-api.service";
 import TopicsApiService from "@/services/topics-api.service";*/
-
+import * as filestack from 'filestack-js';
 export default {
   name: "add-studyMaterial",
   data() {
@@ -68,6 +70,8 @@ export default {
       editedIndex: -1,
       editedItem:{id:0, title: '', description: ''},
       defaultItem:{id:0, title: '', description: ''},
+      file:{},
+      fileImage:""
     }
   },
   watch: {
@@ -144,11 +148,25 @@ export default {
     },
     navigateToHome() {
       this.$router.push('/');
+    },
+    addStudyMaterial()
+    {
+      const client = filestack.init("AkbOUC0woSXyXNPNflK1Yz");
+      const options = {
+      acceptFn: (file, options) => {
+        return options.mimeFromMagicBytes(file.originalFile).then(() => {
+        this.file=file
+        this.fileImage=file.url
+        console.log('iamge',this.file.originalFile);
+        })}
+        };
+      client.picker(options).open();
+      console.log(client);
     }
   }
 }
 </script>
 
-<style scoped>
+<style>
 
 </style>

@@ -2,7 +2,7 @@
   <v-form v-model="valid" data-app>
     <v-container fluid id="bg">
       <v-row justify="center">
-        <v-col cols="12" sm="6" xs="3">
+        <v-col cols="12" sm="6" xs="3" class="tutor_courses">
           <h1>StudyDesk</h1>
 
           <h3>Conviértete en tutor</h3>
@@ -22,7 +22,6 @@
                     height="50px"
                     background-color="#ffffff"
                     style="width: 300px"
-                    rounded
                     :items="courses"
                   ></v-select>
                 </v-col>
@@ -38,7 +37,6 @@
                     height="50px"
                     background-color="#ffffff"
                     style="width: 300px"
-                    rounded
                     :items="courses"
                   />
                 </v-col>
@@ -54,9 +52,8 @@
                     height="50px"
                     background-color="#ffffff"
                     style="width: 300px"
-                    rounded
                     :items="courses"
-                  />
+                  ></v-select>
                 </v-col>
                 
               </v-row>
@@ -70,7 +67,6 @@
                     height="50px"
                     background-color="#ffffff"
                     style="width: 300px"
-                    rounded
                     :items="courses"
                   />
                 </v-col>
@@ -79,7 +75,6 @@
               <v-btn
                 color="#2c305b"
                 dark
-                rounded
                 class="shrink mx-4"
                 style="margin-top: 10px"
                 @click="isShowDialog = true"
@@ -94,21 +89,6 @@
 
             </v-col>
           </v-row>
-        </v-col>
-        <v-col cols="12" sm="6"  xs="3" id="bg-color">
-          <v-spacer style="height: 15vh" />
-          <v-row>
-            <v-spacer></v-spacer>
-            <v-img
-              src="../images/avatar.png"
-              style="opacity: 0.7"
-              contain
-              min-width="280px"
-            >
-            </v-img>
-            <v-spacer></v-spacer>
-          </v-row>
-          <v-spacer style="height: 15vh" />
         </v-col>
       </v-row>
     </v-container>
@@ -145,9 +125,6 @@ export default {
 
 <style scoped>
 #bg {
-  background-image: url("../images/fondo1.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
   text-align: center;
 }
 
@@ -173,5 +150,9 @@ h3 {
 h4 {
   padding-top: 30px;
   font-size: 1.05em;
+}
+.tutor_courses{
+  margin: 0 auto;
+  height: 100vh;
 }
 </style>
