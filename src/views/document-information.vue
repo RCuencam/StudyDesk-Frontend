@@ -15,7 +15,6 @@
              :size="20"
              :width="4"
              color="#2C305B"
-             align="center"
              indeterminate
              class="loader document-info-container-content-loader"
          ></v-progress-circular>
@@ -33,15 +32,16 @@ import StudyMaterialsApiService from "../services/study-materials-api.service"
 export default {
   name: "DocumentInformation",
   data:()=>({
-    document:{},
+    document:{
+      fileUrl: ""
+    },
     loader:false
   }),
   methods:{
     downloadDocument(){
       this.loader=true;
       setTimeout(()=>{
-        // TODO: interaction with api file stack
-
+        window.open(this.document.fileUrl, "Your Document is here")
         this.loader=false;
       },1000)
     }
