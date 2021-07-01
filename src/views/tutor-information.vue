@@ -22,7 +22,7 @@
           <v-textarea no-resize
           ></v-textarea>
 
-          <p class="tutor-price"><b>Total a pagar: {{ totalPrice }}</b></p>
+          <p class="tutor-price"><b>Monto: {{ totalPrice }}</b></p>
           <br>
           <v-dialog
               transition="dialog-top-transition"
@@ -48,11 +48,13 @@
                   </div>
                 </v-card-text>
                 <v-card-actions class="justify-end">
+
                   <v-btn
                       text
                       @click="navigateToSearchTutors(dialog)"
                       class="modal-button"
                   >Close</v-btn>
+
                 </v-card-actions>
               </v-card>
             </template>
@@ -67,10 +69,14 @@
 
 <script>
 import TutorsApiService from "../services/tutors-api-service";
+
+
 export default {
   name: "TutorInformation",
   data:()=>({
-    tutor:{}
+    tutor:{
+      pricePerHour: ""
+    }
   }),
   created(){
     TutorsApiService.get(this.$route.params.id).then(data=>this.tutor=data.data)
@@ -78,13 +84,33 @@ export default {
   },
   computed: {
     totalPrice() {
-      return "S/" + this.tutor.price + ".00"
+      return "S/" + this.tutor.pricePerHour + ".00"
     }
   },
   methods: {
     navigateToSearchTutors(dialog) {
       dialog.value = false
-      this.$router.push("/search/tutors")
+      let user = JSON.parse(localStorage.getItem('user'));
+      if (user.id) {
+        // TODO: call api reserve tutor
+        console.log(user.id)
+      }
+
+      // this.$store.dispatch('auth/login', this.user).then(
+      //     (user) => {
+      //       console.log('Logged In');
+      //       console.log(user);
+      //       if (user.token) this.$router.push('/');
+      //     },
+      //     error => {
+      //       console.log('Error');
+      //       this.message = (error.response && error.response.data)
+      //           || error.message || error.toString();
+      //     }
+      // )
+
+
+      // this.$router.push("/search/tutors")
     }
 
   }

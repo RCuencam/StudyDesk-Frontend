@@ -1,11 +1,9 @@
-import axios from 'axios';
-
-const API_URL = 'http://localhost:37353/api/';
+import http from "./http.common";
 
 class AuthService {
     login(user) {
         console.log('About to request');
-        return axios.post(API_URL + "users/authenticate", JSON.stringify(
+        return http.post( "/users/authenticate", JSON.stringify(
             {email: user.email, password: user.password})
             , {headers: {'Content-Type': 'application/json'}}
         ).then(function (response) {
@@ -35,7 +33,7 @@ class AuthService {
     }
 
     register(user) {
-        return axios.post(API_URL + `careers/${user.career}/students`, {
+        return http.post( `/careers/${user.career}/students`, {
             name: user.name,
             lastName: user.lastName,
             logo: user.logo,

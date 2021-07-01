@@ -9,3 +9,21 @@ export default function authHeader() {
         return {};
     }
 }
+
+
+// example of use in a service:
+
+/*
+import authHeader from "@/services/auth-header";
+
+const API_URL = 'https://localhost:5001/api/users';
+
+class UserService {
+    getAll() {
+        console.log(authHeader());
+        return axios.get(API_URL, { headers: authHeader() }); // colocando el token en el header
+    }
+}
+
+export default new UserService();
+* */
