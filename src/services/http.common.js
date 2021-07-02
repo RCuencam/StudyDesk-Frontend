@@ -2,7 +2,7 @@
 import axios from "axios"
 
 const http=axios.create({
-    baseURL:'https://studydeskapi.azurewebsites.net/api/',
+    baseURL:'http://localhost:37353/api',
     headers:{
         'Content-type':'application/json',
         
