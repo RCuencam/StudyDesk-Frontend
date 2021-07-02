@@ -52,6 +52,9 @@
               <v-card-title>{{item.student.name}}</v-card-title>
               <v-card-subtitle>{{item.platformUrl}}</v-card-subtitle>
             </div>
+            <div>
+              <button class="tutor-profile-content-request-button-deny" @click="denyReservation(item.id)">Denegar</button>
+            </div>
           </v-card>
         </div>
         <div v-else class="empty">
@@ -93,6 +96,7 @@ export default {
     fechas:[],
     array:[],
     updatedReservation:{},
+    deleteReservation:{},
     arraryFecha:{}
   }),
   created:function(){
@@ -122,7 +126,7 @@ export default {
     acceptReservation(id){
       this.reservations=this.reservations.map(item=>{
         if(item.id===id){
-          item.confirmed=false
+          item.confirmed=true
           this.updatedReservation=item
         }
         return item
@@ -144,7 +148,18 @@ export default {
       .catch(error=>console.log(error.response))
     },
     denyReservation(id){
+      this.reservations=this.reservations.map(item=>{
+        if(item.id===id){
+          this.deleteReservation=item
+        }
+        return item
+      })
+      const tutorJson=JSON.parse(localStorage.getItem('tutor'))
       this.reservations=this.reservations.filter(item=>item.id!=id);
+      console.log(this.deleteReservation);
+      ReservationApiService.deleteReservation(this.deleteReservation.id,this.deleteReservation.student.id,tutorJson.id)
+      .then(data=>console.log(data))
+      .catch(error=>console.log(error.response))
     },
     solicitudIsEmpty(){
       return this.solicitudes.length===0;
@@ -158,10 +173,10 @@ export default {
   },
   computed:{
     solicitudes(){
-      return this.reservations.filter(item=>item.confirmed===true);
+      return this.reservations.filter(item=>item.confirmed===false);
     },
     tutoriasConfirmadas(){
-      return this.reservations.filter(item=>item.confirmed===false);
+      return this.reservations.filter(item=>item.confirmed===true);
     }
   }
 };

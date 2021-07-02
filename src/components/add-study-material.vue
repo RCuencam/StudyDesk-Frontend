@@ -156,7 +156,7 @@ export default {
         return options.mimeFromMagicBytes(file.originalFile).then(() => {
         this.file=file
         this.fileImage=file.url
-        console.log('iamge',this.file.originalFile);
+        console.log('iamge',file);
         })}
         };
       client.picker(options).open();

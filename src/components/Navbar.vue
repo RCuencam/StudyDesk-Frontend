@@ -9,44 +9,14 @@
 
       <v-spacer></v-spacer>
 
-      <div>
-        <v-avatar
-            class="user"
-            size="40"
-        >
-          <span class="white--text text-h5">User</span>
-        </v-avatar>
-        <span class="white--text text-h5">Javier Luján</span>
-        <v-menu
-        left
-        bottom
-      >
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn
-            icon
-            v-bind="attrs"
-            v-on="on"
-          >
-            <v-icon>mdi-chevron-down</v-icon>
-          </v-btn>
-        </template>
-
-        <v-list>
-          <v-list-item
-
-            @click="() => this.$router.push('/student/profile')"
-          >
-            <v-list-item-title>Perfil</v-list-item-title>
-          </v-list-item>
-          <v-list-item
-
-            @click="() => {}"
-          >
-            <v-list-item-title>Cerrar Sesión</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
-      </div>
+    <div class="navbar_buttons">
+      <ul>
+        <li><button @click="login()">Login</button></li>
+        <li><button @click="register()">Register</button></li>
+        <li><button @click="perfilTutor()">Perfil Tutor</button></li>
+        <li><button @click="perfilStudent()">Perfil Usuario</button></li>
+      </ul>
+    </div>
     </v-toolbar>
     <v-navigation-drawer
         v-model="drawer"
@@ -88,6 +58,20 @@ export default {
     drawer: false,
     group: null,
   }),
+  methods:{
+    login(){
+      this.$router.push('/login')
+    },
+    register(){
+      this.$router.push('/register')
+    },
+    perfilTutor(){
+      this.$router.push('/tutorprofile')
+    },
+    perfilStudent(){
+      this.$router.push('/student/profile')
+    }
+  }
 }
 </script>
 
@@ -101,5 +85,18 @@ export default {
 .row-button{
   margin-left: 10px;
   padding: 5px;
+}
+.navbar_buttons ul{
+  list-style:none;
+  display: flex;
+}
+.navbar_buttons ul li{
+  margin: 0 10px;
+}
+.navbar_buttons ul li button{
+  border: 1px solid darkblue;
+  color: darkblue;
+  padding: 5px 10px;
+  border-radius: 5px;
 }
 </style>

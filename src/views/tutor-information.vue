@@ -189,6 +189,7 @@ export default {
         this.item.qualification = 0
 
         if (this.item.platformUrl) {
+          localStorage.setItem('tutor',JSON.stringify(this.tutor))
           TutorReservationApiService.createReservation(user.id, this.tutor.id, this.item)
           .then(result => {
             console.log(result)

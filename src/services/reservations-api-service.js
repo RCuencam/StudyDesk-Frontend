@@ -31,6 +31,10 @@ class ReservetionsApiService{
         console.log('dta',data);
         return http.put(`students/${studentId}/tutors/${tutorId}?id=${id}`,data)
     }
+
+    deleteReservation(id,studentId,tutorId){
+        return http.delete(`students/${studentId}/tutors/${tutorId}?id=${id}`)
+    }
     
 }
 
